@@ -216,7 +216,7 @@ const AboutMe = () => {
             </h2>
           </div>
 
-          <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[30%_40%_30%] gap-[10px] items-center px-4 md:px-12 group">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[25%_50%_25%] gap-24 items-center px-4 md:px-12 group justify-center">
             {/* Left: First Project Image (30%) */}
             <div className="flex justify-center md:justify-end">
               <div className="relative w-[220px] h-[220px] shadow-sm overflow-hidden">
