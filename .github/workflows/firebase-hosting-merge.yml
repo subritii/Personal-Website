@@ -28,6 +28,7 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}'
           channelId: live
-          projectId: your-firebase-project-id-here # REPLACE THIS
+          projectId: personal-website-21fef
+          target: subriti-personal-portfolio
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
