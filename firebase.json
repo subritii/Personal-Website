@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "subriti-personal-portfolio",
-    "public": "public",
+    "public": "out",
     "ignore": [
       "firebase.json",
       "**/.*",
