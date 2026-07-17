@@ -14,7 +14,7 @@ const Hero = () => {
                   src="/portrait_cutout.png" 
                   alt="Subriti Pradhan" 
                   fill 
-                  className="object-contain object-top grayscale hover:grayscale-0 transition-all duration-1000 ease-out"
+                  className="object-contain object-top"
                   priority
                   quality={100}
                   unoptimized
