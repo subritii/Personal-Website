@@ -57,7 +57,7 @@ const TechnicalPortfolio = () => {
               <div className="text-[10px] font-bold text-gray-500 mb-4 tracking-widest">EXPLORER</div>
               <div className="pl-2 space-y-1">
                 <div className="flex items-center gap-1 font-bold text-white mb-2">
-                  <span>▼</span> <span>projects</span>
+                  <span>▼</span> <span>case studies</span>
                 </div>
                 
                 {/* Sub-folders */}
