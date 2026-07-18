@@ -66,7 +66,10 @@ const TechnicalPortfolio = () => {
             <div className="bg-[#252526] text-gray-300 border-r border-[#333] p-4 hidden md:block select-none">
               <div className="text-[10px] font-bold text-gray-500 mb-4 tracking-widest">EXPLORER</div>
               <div className="pl-2 space-y-1">
-                <div className="flex items-center gap-1 font-bold text-white mb-2">
+                <div
+                  className="flex items-center gap-1 font-bold text-white mb-2 cursor-pointer hover:text-accent-teal"
+                  onClick={() => setActiveFile(null)}
+                >
                   <span>▼</span> <span>case studies</span>
                 </div>
                 
@@ -111,8 +114,23 @@ const TechnicalPortfolio = () => {
 
             {/* Central Workspace: The Editor */}
             <div className="bg-[#1E1E1E] text-gray-300 flex flex-col">
+              {activeProject && (
+                <div className="flex items-center border-b border-[#333] bg-[#252526]">
+                  <div className="flex items-center gap-2 pl-4 pr-2 py-2 text-xs bg-[#1E1E1E] border-r border-[#333]">
+                    <span>📄</span>
+                    <span>{activeFile}.md</span>
+                    <button
+                      onClick={() => setActiveFile(null)}
+                      aria-label="Close file"
+                      className="ml-1 w-4 h-4 flex items-center justify-center rounded text-gray-500 hover:text-white hover:bg-[#3C3C3C]"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              )}
               {activeProject ? (
-                <div className="w-full h-full p-6 overflow-y-auto text-xs leading-relaxed whitespace-pre-wrap">
+                <div className="w-full flex-1 p-6 overflow-y-auto text-xs leading-relaxed whitespace-pre-wrap">
                   <div className="text-green-400">/** {activeProject.title} */</div>
 
                   <div className="mt-4 text-gray-500">// why this exists</div>
@@ -134,17 +152,46 @@ const TechnicalPortfolio = () => {
                   ))}
                 </div>
               ) : (
-                <div className="flex-1 flex items-center justify-center">
-                  <div className="text-center opacity-20">
-                    <div className="text-6xl mb-4">⌨️</div>
-                    <div className="text-xl">Select a file to view source code</div>
+                <div className="w-full h-full p-6 md:p-8 overflow-y-auto">
+                  <div className="font-mono text-[28px] md:text-[32px] font-bold text-accent-teal">
+                    // case_studies
+                  </div>
+
+                  <div className="mt-8 md:mt-10 max-w-[700px] border-l-2 border-accent-teal pl-4 font-sans text-[16px] md:text-[17px] leading-relaxed text-gray-300">
+                    Each project here started as a system I didn&apos;t fully understand. I studied the architecture first, took notes on the tradeoffs, then built it from that understanding. Not tutorials followed, not templates cloned.
+                  </div>
+
+                  <div className="mt-8 md:mt-10">
+                    <div className="font-mono text-[11px] uppercase tracking-[1px] text-gray-500">
+                      // how to read these
+                    </div>
+                    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="bg-[#2A2A2A] rounded-lg p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-accent-teal font-bold text-base">→</span>
+                          <span className="font-sans font-semibold text-gray-100 text-sm">Editor (left)</span>
+                        </div>
+                        <div className="font-sans text-gray-400 text-sm leading-relaxed">
+                          why it exists, what I learned, the decisions and why
+                        </div>
+                      </div>
+                      <div className="bg-[#2A2A2A] rounded-lg p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-accent-teal font-bold text-base">→</span>
+                          <span className="font-sans font-semibold text-gray-100 text-sm">Properties (right)</span>
+                        </div>
+                        <div className="font-sans text-gray-400 text-sm leading-relaxed">
+                          stack, status, and outcomes at a glance
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
             </div>
 
             {/* Right Sidebar: The Inspector */}
-            <div className={`bg-[#252526] border-l border-[#333] p-6 text-gray-300 hidden lg:block ${activeProject ? '' : 'opacity-30 pointer-events-none'}`}>
+            <div className="bg-[#252526] border-l border-[#333] p-6 text-gray-300 hidden lg:block">
               <div className="text-[10px] font-bold text-gray-500 mb-6 tracking-widest">PROPERTIES</div>
               {activeProject ? (
                 <div className="text-xs space-y-4">
@@ -212,7 +259,15 @@ const TechnicalPortfolio = () => {
                   )}
                 </div>
               ) : (
-                <div className="text-xs italic">Waiting for input...</div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-[1px] text-gray-500 mb-2">APPROACH</div>
+                  <div className="font-sans text-[15px] md:text-[16px] font-semibold text-white leading-snug">
+                    Architecture first, then build.
+                  </div>
+                  <div className="font-sans text-[15px] md:text-[16px] font-semibold text-white leading-snug mt-1">
+                    Notes before code.
+                  </div>
+                </div>
               )}
             </div>
 
