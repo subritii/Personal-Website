@@ -131,25 +131,87 @@ const TechnicalPortfolio = () => {
               )}
               {activeProject ? (
                 <div className="w-full flex-1 p-6 overflow-y-auto text-xs leading-relaxed whitespace-pre-wrap">
-                  <div className="text-green-400">/** {activeProject.title} */</div>
+                  <div className="text-green-400 text-base md:text-lg font-bold">/** {activeProject.title} */</div>
 
-                  <div className="mt-4 text-gray-500">// why this exists</div>
+                  <div className="mt-12 md:mt-14 text-gray-500">// why this exists</div>
                   <div className="text-gray-300">{activeProject.whyItExists}</div>
 
-                  <div className="mt-4 relative w-full pt-[56.25%]">
-                    <iframe
-                      className="absolute inset-0 w-full h-full"
-                      src="https://www.youtube.com/embed/97RfQV_9cpY"
-                      title={`${activeProject.title} demo`}
-                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                    />
-                  </div>
+                  {activeProject.architecture ? (
+                    <>
+                      <div className="mt-12 md:mt-14 text-gray-500">// architecture</div>
+                      <div className="text-gray-300">{activeProject.architecture}</div>
 
-                  <div className="mt-4 text-gray-500">// key engineering decisions</div>
-                  {activeProject.decisions.map((decision, i) => (
-                    <div key={i} className="text-gray-300">— {decision}</div>
-                  ))}
+                      <div className="mt-6 relative w-full pt-[56.25%] bg-black rounded-md overflow-hidden isolate">
+                        <iframe
+                          className="absolute inset-0 w-full h-full"
+                          src="https://www.youtube.com/embed/97RfQV_9cpY"
+                          title={`${activeProject.title} demo`}
+                          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      </div>
+
+                      {activeProject.agents && activeProject.agents.length > 0 && (
+                        <>
+                          <div className="mt-12 md:mt-14 text-gray-500">// agent breakdown</div>
+                          <div className="mt-4 divide-y divide-white/10">
+                            {activeProject.agents.map((agent, i) => (
+                              <div key={i} className={`py-6 ${i === 0 ? 'pt-0' : ''}`}>
+                                <div className="font-sans font-bold text-white text-sm">{agent.name}</div>
+                                <div className="mt-1.5 inline-block font-mono text-[11px] text-gray-400 bg-[#2A2A2A] border border-[#3C3C3C] rounded px-2 py-0.5">
+                                  Trigger: {agent.trigger}
+                                </div>
+                                <div className="text-gray-300 mt-2">{agent.description}</div>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      )}
+
+                      {activeProject.eventContract && activeProject.eventContract.length > 0 && (
+                        <>
+                          <div className="mt-12 md:mt-14 text-gray-500">// event contract</div>
+                          <div className="mt-4 max-w-[560px] rounded-md overflow-hidden border border-[#333]">
+                            {activeProject.eventContract.map((row, i) => (
+                              <div
+                                key={i}
+                                className={`grid grid-cols-[minmax(220px,auto)_1fr] gap-x-6 px-3 py-2 border-b border-[#2E2E2E] last:border-b-0 ${
+                                  i % 2 === 0 ? 'bg-[#242424]' : 'bg-[#1E1E1E]'
+                                }`}
+                              >
+                                <span className="text-gray-300">{row.event}</span>
+                                <span className="text-gray-400">{row.consumer}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      )}
+
+                      {activeProject.decisionDeepDive && (
+                        <>
+                          <div className="mt-12 md:mt-14 text-gray-500">// one decision, in depth</div>
+                          <div className="text-gray-300">{activeProject.decisionDeepDive}</div>
+                        </>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <div className="mt-6 relative w-full pt-[56.25%] bg-black rounded-md overflow-hidden isolate">
+                        <iframe
+                          className="absolute inset-0 w-full h-full"
+                          src="https://www.youtube.com/embed/97RfQV_9cpY"
+                          title={`${activeProject.title} demo`}
+                          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      </div>
+
+                      <div className="mt-12 md:mt-14 text-gray-500">// key engineering decisions</div>
+                      {activeProject.decisions.map((decision, i) => (
+                        <div key={i} className="text-gray-300">— {decision}</div>
+                      ))}
+                    </>
+                  )}
                 </div>
               ) : (
                 <div className="w-full h-full p-6 md:p-8 overflow-y-auto">
