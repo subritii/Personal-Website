@@ -136,80 +136,105 @@ const TechnicalPortfolio = () => {
                   <div className="mt-12 md:mt-14 text-gray-500">// why this exists</div>
                   <div className="text-gray-300">{activeProject.whyItExists}</div>
 
-                  {activeProject.architecture ? (
+                  {activeProject.architecture && (
                     <>
                       <div className="mt-12 md:mt-14 text-gray-500">// architecture</div>
                       <div className="text-gray-300">{activeProject.architecture}</div>
+                    </>
+                  )}
 
-                      <div className="mt-6 relative w-full pt-[56.25%] bg-black rounded-md overflow-hidden isolate">
-                        <iframe
-                          className="absolute inset-0 w-full h-full"
-                          src="https://www.youtube.com/embed/97RfQV_9cpY"
-                          title={`${activeProject.title} demo`}
-                          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                        />
+                  {activeProject.demoVideoId && (
+                    <div className="mt-6 relative w-full pt-[56.25%] bg-black rounded-md overflow-hidden isolate">
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src={`https://www.youtube.com/embed/${activeProject.demoVideoId}`}
+                        title={`${activeProject.title} demo`}
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                  )}
+
+                  {activeProject.dataModel && (
+                    <>
+                      <div className="mt-12 md:mt-14 text-gray-500">// data model</div>
+                      <div className="text-gray-300">{activeProject.dataModel}</div>
+                    </>
+                  )}
+
+                  {activeProject.agents && activeProject.agents.length > 0 && (
+                    <>
+                      <div className="mt-12 md:mt-14 text-gray-500">// agent breakdown</div>
+                      <div className="mt-4 divide-y divide-white/10">
+                        {activeProject.agents.map((agent, i) => (
+                          <div key={i} className={`py-6 ${i === 0 ? 'pt-0' : ''}`}>
+                            <div className="font-sans font-bold text-white text-sm">{agent.name}</div>
+                            <div className="mt-1.5 inline-block font-mono text-[11px] text-gray-400 bg-[#2A2A2A] border border-[#3C3C3C] rounded px-2 py-0.5">
+                              Trigger: {agent.trigger}
+                            </div>
+                            <div className="text-gray-300 mt-2">{agent.description}</div>
+                          </div>
+                        ))}
                       </div>
+                    </>
+                  )}
 
-                      {activeProject.agents && activeProject.agents.length > 0 && (
-                        <>
-                          <div className="mt-12 md:mt-14 text-gray-500">// agent breakdown</div>
-                          <div className="mt-4 divide-y divide-white/10">
-                            {activeProject.agents.map((agent, i) => (
-                              <div key={i} className={`py-6 ${i === 0 ? 'pt-0' : ''}`}>
-                                <div className="font-sans font-bold text-white text-sm">{agent.name}</div>
-                                <div className="mt-1.5 inline-block font-mono text-[11px] text-gray-400 bg-[#2A2A2A] border border-[#3C3C3C] rounded px-2 py-0.5">
-                                  Trigger: {agent.trigger}
-                                </div>
-                                <div className="text-gray-300 mt-2">{agent.description}</div>
-                              </div>
-                            ))}
+                  {activeProject.layers && activeProject.layers.length > 0 && (
+                    <>
+                      <div className="mt-12 md:mt-14 text-gray-500">// the three layers</div>
+                      <div className="mt-4 divide-y divide-white/10">
+                        {activeProject.layers.map((layer, i) => (
+                          <div key={i} className={`py-6 ${i === 0 ? 'pt-0' : ''}`}>
+                            <div className="font-sans font-bold text-white text-sm">{layer.name}</div>
+                            <div className="mt-1.5 inline-block font-mono text-[11px] text-gray-400 bg-[#2A2A2A] border border-[#3C3C3C] rounded px-2 py-0.5">
+                              {layer.meta}
+                            </div>
+                            <div className="text-gray-300 mt-2">{layer.description}</div>
                           </div>
-                        </>
-                      )}
+                        ))}
+                      </div>
+                    </>
+                  )}
 
-                      {activeProject.eventContract && activeProject.eventContract.length > 0 && (
-                        <>
-                          <div className="mt-12 md:mt-14 text-gray-500">// event contract</div>
-                          <div className="mt-4 max-w-[560px] rounded-md overflow-hidden border border-[#333]">
-                            {activeProject.eventContract.map((row, i) => (
-                              <div
-                                key={i}
-                                className={`grid grid-cols-[minmax(220px,auto)_1fr] gap-x-6 px-3 py-2 border-b border-[#2E2E2E] last:border-b-0 ${
-                                  i % 2 === 0 ? 'bg-[#242424]' : 'bg-[#1E1E1E]'
-                                }`}
-                              >
-                                <span className="text-gray-300">{row.event}</span>
-                                <span className="text-gray-400">{row.consumer}</span>
-                              </div>
-                            ))}
+                  {activeProject.eventContract && activeProject.eventContract.length > 0 && (
+                    <>
+                      <div className="mt-12 md:mt-14 text-gray-500">// event contract</div>
+                      <div className="mt-4 max-w-[560px] rounded-md overflow-hidden border border-[#333]">
+                        {activeProject.eventContract.map((row, i) => (
+                          <div
+                            key={i}
+                            className={`grid grid-cols-[minmax(220px,auto)_1fr] gap-x-6 px-3 py-2 border-b border-[#2E2E2E] last:border-b-0 ${
+                              i % 2 === 0 ? 'bg-[#242424]' : 'bg-[#1E1E1E]'
+                            }`}
+                          >
+                            <span className="text-gray-300">{row.event}</span>
+                            <span className="text-gray-400">{row.consumer}</span>
                           </div>
-                        </>
-                      )}
+                        ))}
+                      </div>
+                    </>
+                  )}
 
-                      {activeProject.decisionDeepDive && (
-                        <>
-                          <div className="mt-12 md:mt-14 text-gray-500">// one decision, in depth</div>
-                          <div className="text-gray-300">{activeProject.decisionDeepDive}</div>
-                        </>
-                      )}
+                  {activeProject.decisionDeepDive ? (
+                    <>
+                      <div className="mt-12 md:mt-14 text-gray-500">// one decision, in depth</div>
+                      <div className="text-gray-300">{activeProject.decisionDeepDive}</div>
                     </>
                   ) : (
-                    <>
-                      <div className="mt-6 relative w-full pt-[56.25%] bg-black rounded-md overflow-hidden isolate">
-                        <iframe
-                          className="absolute inset-0 w-full h-full"
-                          src="https://www.youtube.com/embed/97RfQV_9cpY"
-                          title={`${activeProject.title} demo`}
-                          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                        />
-                      </div>
+                    activeProject.decisions.length > 0 && (
+                      <>
+                        <div className="mt-12 md:mt-14 text-gray-500">// key engineering decisions</div>
+                        {activeProject.decisions.map((decision, i) => (
+                          <div key={i} className="text-gray-300">— {decision}</div>
+                        ))}
+                      </>
+                    )
+                  )}
 
-                      <div className="mt-12 md:mt-14 text-gray-500">// key engineering decisions</div>
-                      {activeProject.decisions.map((decision, i) => (
-                        <div key={i} className="text-gray-300">— {decision}</div>
-                      ))}
+                  {activeProject.testingApproach && (
+                    <>
+                      <div className="mt-12 md:mt-14 text-gray-500">// testing approach</div>
+                      <div className="text-gray-300">{activeProject.testingApproach}</div>
                     </>
                   )}
                 </div>
@@ -308,7 +333,7 @@ const TechnicalPortfolio = () => {
                       <div className="text-gray-500 mb-2">METRICS</div>
                       <div className="grid grid-cols-1 gap-3">
                         {activeProject.metrics.map((metric, i) => {
-                          const { value, label } = splitMetric(metric);
+                          const { value, label } = typeof metric === 'string' ? splitMetric(metric) : metric;
                           return (
                             <div key={i} className="bg-[#2D2D2D] border border-[#3C3C3C] rounded-lg p-3">
                               <div className="text-2xl font-bold text-[#4EC9B0]">{value}</div>
